@@ -11,14 +11,7 @@ import homework_db.manager.StaffMyNumberManager;
 import homework_db.data.StaffMyNumber;
 import homework_db.data.StaffMaster;
 import homework_db.data.MyNumber;
-import static java.lang.System.out;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

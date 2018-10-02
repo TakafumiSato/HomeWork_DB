@@ -7,7 +7,6 @@ package homework_db.manager;
 
 import homework_db.DBController;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
