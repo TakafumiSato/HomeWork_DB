@@ -30,6 +30,7 @@ public class MyNumberManager extends DataManager {
     /*
     mynumber_tableのテーブル名を取得
     戻り値:String
+    DataManagerクラスをオーバーライド
     */
     @Override
     protected String getTableName() {
@@ -37,6 +38,12 @@ public class MyNumberManager extends DataManager {
         return tableName;
     }
     
+    /*
+    ResultSetからデータを取得
+    引数:ResultSet
+    戻り値:ArrayList<MyNumber>
+    DataManagerクラスをオーバーライド
+    */
     @Override
     protected ArrayList<MyNumber> readData(ResultSet rs) {
         

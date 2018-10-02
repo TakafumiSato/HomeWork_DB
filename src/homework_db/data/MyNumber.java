@@ -8,10 +8,11 @@ package homework_db.data;
 /**
  *
  * @author 佐藤孝史
+ * 
+ * MyNumberデータクラス
  */
 public class MyNumber {
     
-    public static final int MAX_COLUMN = 2;
     private int id = 0;
     private long myNumber = 0;
     

@@ -17,6 +17,10 @@ import java.util.logging.Logger;
 /**
  *
  * @author 佐藤孝史
+ * 
+ * StaffMasterManager、MyNumberManager、StaffMyNumberクラスの親クラス
+ * テーブルからデータを取得するgetAllメソッドを実装
+ * それに伴い、テーブル名の取得とデータ書き出し部分を抽象クラスとし、子クラスで定義する
  */
 public abstract class DataManager {
 

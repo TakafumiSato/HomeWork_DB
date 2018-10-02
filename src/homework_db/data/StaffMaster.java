@@ -11,7 +11,6 @@ package homework_db.data;
  */
 public class StaffMaster {
     
-    public static final int MAX_COLUMN = 4;
     private int id;
     private String name;
     private String gender;

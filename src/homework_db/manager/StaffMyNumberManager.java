@@ -44,6 +44,7 @@ public class StaffMyNumberManager extends DataManager {
     /*
     mynumber_tableのテーブル名を取得
     戻り値:String
+    DataManagerクラスをオーバーライド
     */
     @Override
     protected String getTableName() {
@@ -55,6 +56,7 @@ public class StaffMyNumberManager extends DataManager {
     ResultSetからデータを書き出し
     引数:ResultSet
     戻り値:ArrayList<StaffMyNumber>
+    DataManagerクラスをオーバーライド
     */
     @Override
     protected ArrayList<StaffMyNumber> readData(ResultSet rs) {

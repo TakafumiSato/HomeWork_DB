@@ -21,6 +21,9 @@ public class DBController {
     
     private Connection connection = null;
     
+    /*
+    データベースをオープン
+    */
     public Connection openDB() {
         
         try {
