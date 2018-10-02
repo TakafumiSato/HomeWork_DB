@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package homework_db;
+package homework_db.manager;
 
 import homework_db.data.MyNumber;
 import java.sql.ResultSet;
@@ -21,11 +21,11 @@ import java.util.logging.Logger;
  */
 public class MyNumberManager extends DataManager {
     
-    private static final String tableName = "mynumber_table";
     
     public MyNumberManager() {
         
         logger = Logger.getLogger(MyNumberManager.class.getName());
+        tableName = "mynumber_table";
     }
     
     /*

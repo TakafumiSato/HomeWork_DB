@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package homework_db;
+package homework_db.manager;
 
 import homework_db.data.StaffMyNumber;
 import homework_db.data.StaffMaster;

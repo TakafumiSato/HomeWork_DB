@@ -5,6 +5,9 @@
  */
 package homework_db;
 
+import homework_db.manager.StaffMasterManager;
+import homework_db.manager.MyNumberManager;
+import homework_db.manager.StaffMyNumberManager;
 import homework_db.data.StaffMyNumber;
 import homework_db.data.StaffMaster;
 import homework_db.data.MyNumber;
