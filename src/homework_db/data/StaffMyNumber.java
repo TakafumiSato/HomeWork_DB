@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package homework_db;
+package homework_db.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +32,15 @@ public class StaffMyNumber {
         setAge();
     }
     
+    public void setData(StaffMyNumber data) {
+        
+        this.id = data.getID();
+        this.name = data.getName();
+        this.gender = data.getGender();
+        this.birth = data.getBirth();
+        this.myNumber = data.getMyNumber();
+    }
+    
     public int getID() {
         return id;
     }
@@ -52,14 +61,22 @@ public class StaffMyNumber {
         return myNumber;
     }
     
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     private void setAge() {
         Date now = new Date();
         
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        age = (Integer.parseInt(sdf.format(now)) - birth) / 10000;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        age = (Integer.parseInt(sdf.format(now)) - birth / 10000);
     }
     
     public int getAge() {
         return age;
+    }
+    
+    public void output() {
+        System.out.println(id + "," + name + "," + gender + "," + birth + "," + age);
     }
 }
