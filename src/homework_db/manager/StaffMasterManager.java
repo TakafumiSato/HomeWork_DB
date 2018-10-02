@@ -26,7 +26,6 @@ public class StaffMasterManager extends DataManager {
     
     public StaffMasterManager() {
         
-        logger = Logger.getLogger(StaffMasterManager.class.getName());
         tableName = "staffmaster_table";
     }
     
@@ -51,7 +50,7 @@ public class StaffMasterManager extends DataManager {
                 list.add(new StaffMaster(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("birth")));
             }
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyNumberManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return list;

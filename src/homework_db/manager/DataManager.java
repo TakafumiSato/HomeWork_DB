@@ -19,45 +19,11 @@ import java.util.logging.Logger;
  *
  * @author 佐藤孝史
  */
-public abstract class DataManager implements DBController {
-    
-    protected Connection connection = null;
-    protected Logger logger = null;
+public abstract class DataManager {
+
     protected String tableName = null;
     
-    public void openDB() {
-        
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mynumberdb?useUnicode=true&characterEncoding=utf8","TakafumiSato","1234567");
-            
-            System.out.println("データベース接続成功");
-        } catch (SQLException se) {
-            logger.log(Level.SEVERE, "データベース接続失敗", se);
-            
-            try {
-                // 接続に失敗したらクローズ
-                connection.close();
-                connection = null;
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, "データベースクローズ失敗", ex);
-            }
-        }
-    }
     
-    /*
-    データベースをクローズ
-    */
-    public void closeDB() {
-        
-        try {
-            if (connection != null)
-                connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            connection = null;
-        }
-    }
     
     /*
     mynumber_tableのテーブルデータを全取得
@@ -70,12 +36,12 @@ public abstract class DataManager implements DBController {
         ArrayList<?> list = new ArrayList<>();
         
         // データベース オープン
-        openDB();
+        DBController.openDB();
         
         try {
             
             // データの取得
-            stmt = connection.createStatement();
+            stmt = DBController.getConnection().createStatement();
             rs = stmt.executeQuery("SELECT * FROM " + getTableName());
 
             list = readData(rs);
@@ -91,17 +57,17 @@ public abstract class DataManager implements DBController {
                 // Statement クローズ
                 stmt.close();
             } catch (SQLException ex) {
-                logger.log(Level.SEVERE, "Statement クローズ失敗", ex);
+                Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, "Statement クローズ失敗", ex);
             }
             try {
                 // ResultSet クローズ
                 rs.close();
             } catch (SQLException ex) {
-                logger.log(Level.SEVERE, "ResultSet クローズ失敗", ex);
+                Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, "ResultSet クローズ失敗", ex);
             }
             
             // データベース クローズ
-            closeDB();
+            DBController.closeDB();
             stmt = null;
             rs = null;
             

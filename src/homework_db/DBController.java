@@ -17,15 +17,45 @@ import java.util.logging.Logger;
  * 
  * データベースへのアクセスを管理
  */
-public interface DBController {
+public class DBController {
     
-    /*
-    データベースをオープン
-    */
-    public void openDB();
+    private static Connection connection = null;
+
+    public static Connection getConnection() {
+        return connection;
+    }
+    
+    public static void openDB() {
+        
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mynumberdb?useUnicode=true&characterEncoding=utf8","TakafumiSato","1234567");
+            
+            System.out.println("データベース接続成功");
+        } catch (SQLException se) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, "データベース接続失敗", se);
+            
+            try {
+                // 接続に失敗したらクローズ
+                connection.close();
+                connection = null;
+            } catch (SQLException ex) {
+                Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, "データベースクローズ失敗", ex);
+            }
+        }
+    }
     
     /*
     データベースをクローズ
     */
-    public void closeDB();
+    public static void closeDB() {
+        
+        try {
+            if (connection != null)
+                connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            connection = null;
+        }
+    }
 }

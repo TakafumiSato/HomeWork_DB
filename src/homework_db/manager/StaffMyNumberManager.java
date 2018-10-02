@@ -5,10 +5,12 @@
  */
 package homework_db.manager;
 
+import homework_db.DBController;
 import homework_db.data.StaffMyNumber;
 import homework_db.data.StaffMaster;
 import homework_db.data.MyNumber;
 import static java.lang.System.out;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +39,6 @@ public class StaffMyNumberManager extends DataManager {
     
     public StaffMyNumberManager() {
         
-        logger = Logger.getLogger(StaffMyNumberManager.class.getName());
         tableName = "staffmynumber_table";
     }
     
@@ -67,7 +68,7 @@ public class StaffMyNumberManager extends DataManager {
                 list.add(new StaffMyNumber(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("birth"), rs.getLong("myNumber")));
             }
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffMyNumberManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return list;
@@ -79,15 +80,17 @@ public class StaffMyNumberManager extends DataManager {
     public void setAll(ArrayList<StaffMyNumber> list) {
         
         PreparedStatement ps = null;
+        Connection connection = null;
         
         // データベースオープン
-        openDB();
+        DBController.openDB();
+        connection = DBController.getConnection();
         
         try {
             // オートコミットをオフ
             connection.setAutoCommit(false);
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "オートコミット失敗", ex);
+            Logger.getLogger(StaffMyNumberManager.class.getName()).log(Level.SEVERE, "オートコミット失敗", ex);
         }
         
         try {
@@ -114,11 +117,11 @@ public class StaffMyNumberManager extends DataManager {
                 // エラーの場合ロールバックし、登録を無効
                 connection.rollback();
             } catch (SQLException ex1) {
-                logger.log(Level.SEVERE, "ロールバック失敗", ex1);
+                Logger.getLogger(StaffMyNumberManager.class.getName()).log(Level.SEVERE, "ロールバック失敗", ex1);
             }
             
             out.println("SQLException(setAll):"+ex.getMessage());
-            logger.log(Level.INFO, "例外のスローを捕捉", ex);
+            Logger.getLogger(StaffMyNumberManager.class.getName()).log(Level.INFO, "例外のスローを捕捉", ex);
             
         } finally {
             
@@ -126,11 +129,12 @@ public class StaffMyNumberManager extends DataManager {
                 // PreparedStatement クローズ
                 ps.close();
             } catch (SQLException ex) {
-                logger.log(Level.SEVERE, "クローズ失敗", ex);
+                Logger.getLogger(StaffMyNumberManager.class.getName()).log(Level.SEVERE, "クローズ失敗", ex);
             }
             
             // データベースクローズ
-            closeDB();
+            DBController.closeDB();
+            connection = null;
             ps = null;
         }
     }

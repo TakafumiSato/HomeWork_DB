@@ -24,7 +24,6 @@ public class MyNumberManager extends DataManager {
     
     public MyNumberManager() {
         
-        logger = Logger.getLogger(MyNumberManager.class.getName());
         tableName = "mynumber_table";
     }
     
@@ -49,7 +48,7 @@ public class MyNumberManager extends DataManager {
                 list.add(new MyNumber(rs.getInt("id"),rs.getLong("myNumber")));
             }
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyNumberManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return list;
