@@ -19,13 +19,9 @@ import java.util.logging.Logger;
  */
 public class DBController {
     
-    private static Connection connection = null;
-
-    public static Connection getConnection() {
-        return connection;
-    }
+    private Connection connection = null;
     
-    public static void openDB() {
+    public Connection openDB() {
         
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mynumberdb?useUnicode=true&characterEncoding=utf8","TakafumiSato","1234567");
@@ -42,12 +38,14 @@ public class DBController {
                 Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, "データベースクローズ失敗", ex);
             }
         }
+        
+        return connection;
     }
     
     /*
     データベースをクローズ
     */
-    public static void closeDB() {
+    public void closeDB() {
         
         try {
             if (connection != null)

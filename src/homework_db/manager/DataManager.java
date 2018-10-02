@@ -27,21 +27,23 @@ public abstract class DataManager {
     
     /*
     mynumber_tableのテーブルデータを全取得
-    戻り値:ArrayList<MyNumber>
+    戻り値:ArrayList<?>
     */
     public ArrayList<?> getAll() {
         
+        Connection connection = null;
         Statement stmt = null;
         ResultSet rs = null;
         ArrayList<?> list = new ArrayList<>();
         
         // データベース オープン
-        DBController.openDB();
+        DBController dbController = new DBController();
+        connection = dbController.openDB();
         
         try {
             
             // データの取得
-            stmt = DBController.getConnection().createStatement();
+            stmt = connection.createStatement();
             rs = stmt.executeQuery("SELECT * FROM " + getTableName());
 
             list = readData(rs);
@@ -67,7 +69,8 @@ public abstract class DataManager {
             }
             
             // データベース クローズ
-            DBController.closeDB();
+            dbController.closeDB();
+            connection = null;
             stmt = null;
             rs = null;
             

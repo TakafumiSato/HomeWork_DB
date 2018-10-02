@@ -83,9 +83,9 @@ public class StaffMyNumberManager extends DataManager {
         Connection connection = null;
         
         // データベースオープン
-        DBController.openDB();
-        connection = DBController.getConnection();
+        DBController dbController = new DBController();
         
+        connection = dbController.openDB();
         try {
             // オートコミットをオフ
             connection.setAutoCommit(false);
@@ -133,7 +133,7 @@ public class StaffMyNumberManager extends DataManager {
             }
             
             // データベースクローズ
-            DBController.closeDB();
+            dbController.closeDB();
             connection = null;
             ps = null;
         }
