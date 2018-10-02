@@ -82,6 +82,8 @@ public abstract class DataManager {
         return list;
     }
     
+    // テーブル名の取得
     protected abstract String getTableName();
+    // ResultSetのデータを読込
     protected abstract ArrayList<?> readData(ResultSet rs);
 }
